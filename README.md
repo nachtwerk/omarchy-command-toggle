@@ -14,7 +14,7 @@ Every command runs as a transient systemd user unit, so it:
 ## Install
 
 ```bash
-omarchy plugin add https://gitlab.com/AmbassadorsLab/omarchy-command-toggle.git --enable
+omarchy plugin add https://github.com/nachtwerk/omarchy-command-toggle.git --enable
 ```
 
 Then click the console icon in the bar.
