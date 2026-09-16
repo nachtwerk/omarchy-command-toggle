@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "coen.command-toggle",
+  "id": "command-toggle",
   "name": "Commands",
   "version": "2.0.0",
   "author": "Coen Spoor",

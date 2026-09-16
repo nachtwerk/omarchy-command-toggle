@@ -42,7 +42,7 @@ Saved commands live on the widget's entry in `~/.config/omarchy/shell.json`:
 
 ```json
 {
-  "id": "coen.command-toggle",
+  "id": "command-toggle",
   "commands": [
     { "name": "mysql-proxy", "command": "kubectl port-forward -n prod deploy/mysql-proxy 3308:3306", "restart": true }
   ]
@@ -60,14 +60,14 @@ Saved commands live on the widget's entry in `~/.config/omarchy/shell.json`:
 The widget exposes an IPC target, handy for keybindings:
 
 ```bash
-omarchy-shell coen.command-toggle state            # JSON of everything
-omarchy-shell coen.command-toggle start <name>
-omarchy-shell coen.command-toggle stop <name>
-omarchy-shell coen.command-toggle flip <name>
-omarchy-shell coen.command-toggle run "<command>"  # one-shot
-omarchy-shell coen.command-toggle save <name> "<command>"
-omarchy-shell coen.command-toggle remove <name>
-omarchy-shell coen.command-toggle toggle           # open/close the popup
+omarchy-shell command-toggle state            # JSON of everything
+omarchy-shell command-toggle start <name>
+omarchy-shell command-toggle stop <name>
+omarchy-shell command-toggle flip <name>
+omarchy-shell command-toggle run "<command>"  # one-shot
+omarchy-shell command-toggle save <name> "<command>"
+omarchy-shell command-toggle remove <name>
+omarchy-shell command-toggle toggle           # open/close the popup
 ```
 
 Units can also be driven with plain systemd:

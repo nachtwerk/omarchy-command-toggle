@@ -14,11 +14,11 @@ import qs.Ui
 //   one-shot: omarchy-once-<timestamp>.service (description = the command)
 Panel {
   id: root
-  moduleName: "coen.command-toggle"
-  ipcTarget: "coen.command-toggle"
+  moduleName: "command-toggle"
+  ipcTarget: "command-toggle"
   manageIpc: false   // this panel owns the IPC target so it can add commands
 
-  readonly property string pluginId: "coen.command-toggle"
+  readonly property string pluginId: "command-toggle"
   readonly property string icon: String(setting("icon", "󰆍"))
   readonly property int pollInterval: Math.max(1, Number(setting("interval", 3)))
 
@@ -375,9 +375,9 @@ Panel {
     return null
   }
 
-  // omarchy-shell coen.command-toggle <method> [args]
+  // omarchy-shell command-toggle <method> [args]
   IpcHandler {
-    target: "coen.command-toggle"
+    target: "command-toggle"
 
     function open(): void { root.open() }
     function close(): void { root.close() }
