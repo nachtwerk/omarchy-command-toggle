@@ -16,7 +16,7 @@ Panel {
   id: root
   moduleName: "command-toggle"
   ipcTarget: "command-toggle"
-  manageIpc: false   // this panel owns the IPC target so it can add commands
+  manageIpc: false   // this panel owns the IPC target so it can expose the saved commands
 
   readonly property string pluginId: "command-toggle"
   readonly property string icon: String(setting("icon", "󰆍"))
@@ -376,6 +376,15 @@ Panel {
   }
 
   // omarchy-shell command-toggle <method> [args]
+  //
+  // No method here takes a command. IPC arguments only ever name a command
+  // that already exists in the saved list, and the name is resolved against
+  // that list before anything runs; an unknown name is an error, never a new
+  // command. Commands themselves are only ever created in the popup or by
+  // editing shell.json by hand, so nothing that arrives over IPC can become
+  // a shell program. Keep it that way: never add a method that accepts a
+  // command string, and never pass an IPC argument to startUnit() or
+  // persistSaved().
   IpcHandler {
     target: "command-toggle"
 
@@ -409,18 +418,6 @@ Panel {
       var e = root.findSaved(name)
       if (!e) return "unknown command: " + name
       root.toggleSaved(e)
-      return "ok"
-    }
-    function run(command: string): string {
-      root.runOnce(command)
-      return "ok"
-    }
-    function save(name: string, command: string): string {
-      var cmd = String(command || "").trim()
-      if (!cmd) return "command is required"
-      var n = String(name || "").trim() || cmd.split(/\s+/)[0].replace(/^.*\//, "")
-      if (root.findSaved(n)) return "already saved: " + n
-      root.persistSaved(root.saved.concat([{ name: n, command: cmd, restart: true }]))
       return "ok"
     }
     function remove(name: string): string {

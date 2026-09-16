@@ -79,10 +79,22 @@ omarchy-shell command-toggle state            # JSON of everything
 omarchy-shell command-toggle start <name>
 omarchy-shell command-toggle stop <name>
 omarchy-shell command-toggle flip <name>
-omarchy-shell command-toggle run "<command>"  # one-shot
-omarchy-shell command-toggle save <name> "<command>"
 omarchy-shell command-toggle remove <name>
 omarchy-shell command-toggle toggle           # open/close the popup
+```
+
+IPC only ever names a command you already saved. There is no method that
+takes a command string, so nothing reachable over the shell's IPC socket can
+turn into a shell program: `<name>` is looked up in the saved list and an
+unknown name is an error. New commands are created in the popup, or by
+editing `commands` in `shell.json` yourself.
+
+Earlier versions had `run "<command>"` and `save <name> "<command>"`. Both are
+gone. To script something that used them, save the command once (popup or
+`shell.json`) and drive it by name:
+
+```bash
+omarchy-shell command-toggle start mysql-proxy
 ```
 
 Units can also be driven with plain systemd:

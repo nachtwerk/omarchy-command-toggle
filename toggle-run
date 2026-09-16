@@ -2,6 +2,11 @@
 # usage: toggle-run <unit> <description> <restart: yes|no> <command>
 # Starts <command> as a transient systemd user unit. Clears a previous failed
 # state first so the same unit name can be reused.
+#
+# <command> is run through `bash -lc`, so it is a shell program by design: it
+# comes from the popup or from `commands` in shell.json, both of which are the
+# user typing a command for themselves. Nothing that arrives over the widget's
+# IPC target reaches this script - see the note above IpcHandler in Panel.qml.
 set -u
 unit="$1"
 desc="$2"
