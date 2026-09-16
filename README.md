@@ -19,6 +19,21 @@ omarchy plugin add https://github.com/nachtwerk/omarchy-command-toggle.git --ena
 
 Then click the console icon in the bar.
 
+## Remove
+
+```bash
+omarchy plugin remove command-toggle
+```
+
+Anything still running keeps running until you stop it:
+
+```bash
+systemctl --user stop 'omarchy-toggle-*' 'omarchy-once-*'
+```
+
+The plugin only ever writes its own entry in `~/.config/omarchy/shell.json`,
+which `omarchy plugin remove` takes out again.
+
 ## Use
 
 The popup has two sections.
