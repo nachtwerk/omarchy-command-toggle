@@ -19,10 +19,25 @@ omarchy plugin add https://github.com/nachtwerk/omarchy-command-toggle.git --ena
 
 Then click the console icon in the bar.
 
-## Remove
+### Upgrading from 2.x
+
+The plugin ID changed from `command-toggle` to
+`io.github.nachtwerk.command-toggle`, so settings written under the old ID are
+not picked up. Saved commands are kept on the widget's entry in
+`~/.config/omarchy/shell.json`; rename that entry's `id` to the new value and
+they come back. Running units are unaffected - unit names did not change, so
+anything already started keeps running and the toggles find it again.
+
+Installs of 2.x are removed with the old ID:
 
 ```bash
 omarchy plugin remove command-toggle
+```
+
+## Remove
+
+```bash
+omarchy plugin remove io.github.nachtwerk.command-toggle
 ```
 
 Anything still running keeps running until you stop it:
@@ -57,7 +72,7 @@ Saved commands live on the widget's entry in `~/.config/omarchy/shell.json`:
 
 ```json
 {
-  "id": "command-toggle",
+  "id": "io.github.nachtwerk.command-toggle",
   "commands": [
     { "name": "mysql-proxy", "command": "kubectl port-forward -n prod deploy/mysql-proxy 3308:3306", "restart": true }
   ]
@@ -75,12 +90,14 @@ Saved commands live on the widget's entry in `~/.config/omarchy/shell.json`:
 The widget exposes an IPC target, handy for keybindings:
 
 ```bash
-omarchy-shell command-toggle state            # JSON of everything
-omarchy-shell command-toggle start <name>
-omarchy-shell command-toggle stop <name>
-omarchy-shell command-toggle flip <name>
-omarchy-shell command-toggle remove <name>
-omarchy-shell command-toggle toggle           # open/close the popup
+P=io.github.nachtwerk.command-toggle
+
+omarchy-shell $P state            # JSON of everything
+omarchy-shell $P start <name>
+omarchy-shell $P stop <name>
+omarchy-shell $P flip <name>
+omarchy-shell $P remove <name>
+omarchy-shell $P toggle           # open/close the popup
 ```
 
 IPC only ever names a command you already saved. There is no method that
@@ -94,7 +111,7 @@ gone. To script something that used them, save the command once (popup or
 `shell.json`) and drive it by name:
 
 ```bash
-omarchy-shell command-toggle start mysql-proxy
+omarchy-shell io.github.nachtwerk.command-toggle start mysql-proxy
 ```
 
 Units can also be driven with plain systemd:

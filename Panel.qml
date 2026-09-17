@@ -14,11 +14,11 @@ import qs.Ui
 //   one-shot: omarchy-once-<timestamp>.service (description = the command)
 Panel {
   id: root
-  moduleName: "command-toggle"
-  ipcTarget: "command-toggle"
+  moduleName: "io.github.nachtwerk.command-toggle"
+  ipcTarget: "io.github.nachtwerk.command-toggle"
   manageIpc: false   // this panel owns the IPC target so it can expose the saved commands
 
-  readonly property string pluginId: "command-toggle"
+  readonly property string pluginId: "io.github.nachtwerk.command-toggle"
   readonly property string icon: String(setting("icon", "󰆍"))
   readonly property int pollInterval: Math.max(1, Number(setting("interval", 3)))
 
@@ -375,7 +375,7 @@ Panel {
     return null
   }
 
-  // omarchy-shell command-toggle <method> [args]
+  // omarchy-shell io.github.nachtwerk.command-toggle <method> [args]
   //
   // No method here takes a command. IPC arguments only ever name a command
   // that already exists in the saved list, and the name is resolved against
@@ -386,7 +386,7 @@ Panel {
   // command string, and never pass an IPC argument to startUnit() or
   // persistSaved().
   IpcHandler {
-    target: "command-toggle"
+    target: "io.github.nachtwerk.command-toggle"
 
     function open(): void { root.open() }
     function close(): void { root.close() }
