@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "command-toggle",
+  "id": "io.github.nachtwerk.command-toggle",
   "name": "Commands",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "author": "Coen Spoor",
   "license": "MIT",
   "description": "Start and stop long-running commands from the bar. Saved commands get a toggle; anything typed in runs once. Each runs as a transient systemd user unit with its own journal.",
